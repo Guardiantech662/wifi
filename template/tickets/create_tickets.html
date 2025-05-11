@@ -1,0 +1,40 @@
+
+
+
+
+
+<div style="max-width: 600px; margin: 0 auto; padding: 2rem; background-color: #f9f9f9; border-radius: 10px;">
+    <h2 style="text-align: center; margin-bottom: 1.5rem;">Buy Internet Access Ticket</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div style="margin-bottom: 1rem;">
+            <label for="full_name">Full Name</label><br>
+            <input type="text" id="full_name" name="full_name" value="{{ request.user.username }}" class="form-control" readonly>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="phone_number">Phone Number (for Orange Money)</label><br>
+            <input type="text" id="phone_number" name="phone_number" class="form-control" required placeholder="e.g. 690123456">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="plan">Select Plan</label><br>
+            <select id="plan" name="plan" class="form-control" required>
+                {% for plan in plans %}
+                    <option value="{{ plan.id }}">{{ plan.name }} — {{ plan.price }} GNF / {{ plan.bandwidth_limit }} ({{ plan.duration_months }} month{{ plan.duration_months|pluralize }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="duration">Duration (in months)</label><br>
+            <input type="number" id="duration" name="duration" value="1" min="1" class="form-control" required>
+        </div>
+
+        <button type="submit" style="padding: 10px 20px; background-color: #1b8af3; color: white; border: none; border-radius: 5px; width: 100%;">
+            Pay Now with CinetPay
+        </button>
+    </form>
+</div>

@@ -1,0 +1,10 @@
+<h2>Routers</h2>
+<a href="/admin/routers/create/">Add Router</a>
+<ul>
+  {% for router in routers %}
+    <li>{{ router.name }} - {{ router.ip_address }}</li>
+  {% empty %}
+    <li>No routers configured</li>
+  {% endfor %}
+</ul>
+s

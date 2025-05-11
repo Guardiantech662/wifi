@@ -1,0 +1,19 @@
+<h2>Add MikroTik Router</h2>
+<form method="POST">{% csrf_token %}
+    <label>Name:</label><br>
+    <input type="text" name="name" required><br>
+
+    <label>IP Address:</label><br>
+    <input type="text" name="ip_address" required><br>
+
+    <label>Username:</label><br>
+    <input type="text" name="username" required><br>
+
+    <label>Password:</label><br>
+    <input type="password" name="password" required><br>
+
+    <label>API Port (default 8728):</label><br>
+    <input type="text" name="api_port" value="8728"><br><br>
+
+    <button type="submit">Save Router</button>
+</form>

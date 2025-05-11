@@ -1,0 +1,110 @@
+<h2>Your Tickets</h2>
+<a href="/tickets/create/">Buy New Ticket</a>
+<ul>
+  {% for ticket in tickets %}
+    <li>{{ ticket.plan_name }} - Expires: {{ ticket.expiry_date }} - Status: {{ ticket.is_active }}</li>
+  {% empty %}
+    <li>No tickets found</li>
+  {% endfor %}
+</ul>
+
+
+
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">🎟️ My Access Tickets</h2>
+
+    <div class="mb-3">
+        <a href="{% url 'create_ticket' %}" class="btn btn-primary">➕ Buy New Ticket</a>
+    </div>
+
+    {% if tickets %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Ticket Code</th>
+                    <th>Plan Name</th>
+                    <th>Data Limit (MB)</th>
+                    <th>Start Date</th>
+                    <th>Expiry Date</th>
+                    <th>Status</th>
+                    <th>Time Left</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.ticket_code }}</td>
+                    <td>{{ ticket.plan_name }}</td>
+                    <td>{{ ticket.data_limit_mb }}</td>
+                    <td>{{ ticket.start_date|date:"Y-m-d H:i" }}</td>
+                    <td>{{ ticket.expiry_date|date:"Y-m-d H:i" }}</td>
+                    <td>
+                        {% if ticket.is_active %}
+                            <span class="badge bg-success">Active</span>
+                        {% else %}
+                            <span class="badge bg-danger">Expired</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if ticket.is_active %}
+                            {{ ticket.expiry_date|timesince }} left
+                        {% else %}
+                            Expired {{ ticket.expiry_date|timesince }} ago
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">
+            😕 You have no active tickets. <a href="{% url 'create_ticket' %}">Buy one now!</a>
+        </div>
+    {% endif %}
+</div>
+
+
+
+<div class="container mt-4">
+    <h2>Welcome, {{ user.username }}</h2>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ profile.phone_number }}</p>
+    <a href="{% url 'update_profile' %}" class="btn btn-sm btn-warning">Update Profile</a>
+
+    <hr>
+    <h3>Your Access Tickets</h3>
+    {% if tickets %}
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Ticket Code</th>
+                    <th>Plan</th>
+                    <th>Status</th>
+                    <th>Expires</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.ticket_code }}</td>
+                    <td>{{ ticket.plan_name }}</td>
+                    <td>
+                        {% if ticket.is_active %}
+                            <span class="text-success">Active</span>
+                        {% else %}
+                            <span class="text-danger">Inactive</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ ticket.expiry_date|date:"Y-m-d H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have no access tickets yet.</p>
+    {% endif %}
+</div>
+
+
