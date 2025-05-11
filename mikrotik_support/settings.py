@@ -141,13 +141,7 @@ TWILIO_AUTH_TOKEN = '014f631c30a1a24b464753abd6743c8f'
 TWILIO_PHONE_NUMBER = '+17627221362'  # your Twilio sender number
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jamessahr662@email.com'
-EMAIL_HOST_PASSWORD = 'Kenneth James662'
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'jamessahr662@email.com'
+
 
 
 
